@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :menu_item do
-    name { "MyString" }
-    description { "MyText" }
+    name { "Burger" }
+    description { "Beef with cheese" }
     price { "9.99" }
-    menu { nil }
+    menu
   end
 end
