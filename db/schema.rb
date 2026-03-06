@@ -27,8 +27,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_203809) do
   create_table "menus", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
+    t.bigint "restaurant_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "menu_items", "menus"
+  add_foreign_key "menus", "restaurants"
 end
