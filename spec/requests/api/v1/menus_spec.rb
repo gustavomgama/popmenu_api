@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::Menus", type: :request do
       get "/api/v1/menus"
 
       expect(response).to have_http_status(:success)
-      
+
       json_response = JSON.parse(response.body)
       expect(json_response.length).to eq(1)
 
