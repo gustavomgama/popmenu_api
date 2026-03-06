@@ -1,34 +1,29 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
-# db/seeds.rb
+puts "Clearing old records..."
+MenuItemPlacement.destroy_all
 MenuItem.destroy_all
 Menu.destroy_all
+Restaurant.destroy_all
 
-lunch_menu = Menu.create!(
-  name: "Lunch Menu",
-)
+puts "Creating Restaurant..."
+restaurant = Restaurant.create!(name: "Poppo's Cafe")
 
-dinner_menu = Menu.create!(
-  name: "Dinner Menu",
-)
+puts "Creating Menus..."
+lunch  = Menu.create!(name: "Lunch",  restaurant:)
+dinner = Menu.create!(name: "Dinner", restaurant:)
 
-MenuItem.create!([
-  { name: "Burger", description: "A classic beef burger with cheese.", price: 9.00, menu: lunch_menu },
-  { name: "Small Salad", description: "Fresh greens with vinaigrette.", price: 5.00, menu: lunch_menu },
-  { name: "Chicken Wings", description: "6 pieces of buffalo wings.", price: 9.00, menu: lunch_menu }
+puts "Creating Menu Items..."
+burger  = MenuItem.create!(name: "Burger",               description: "Classic beef burger")
+salad   = MenuItem.create!(name: "Small Salad",          description: "Fresh greens with vinaigrette")
+wings   = MenuItem.create!(name: "Chicken Wings",        description: "6 pieces of buffalo wings")
+lobster = MenuItem.create!(name: "Lobster Mac & Cheese", description: "Decadent mac and cheese with lobster")
+
+puts "Creating Placements..."
+MenuItemPlacement.create!([
+  { menu: lunch,  menu_item: burger,  price: 9.00 },
+  { menu: lunch,  menu_item: salad,   price: 5.00 },
+  { menu: lunch,  menu_item: wings,   price: 9.00 },
+  { menu: dinner, menu_item: burger,  price: 15.00 },
+  { menu: dinner, menu_item: lobster, price: 31.00 }
 ])
 
-MenuItem.create!([
-  { name: "Mega Burger", description: "Double patty beef burger with bacon.", price: 15.00, menu: dinner_menu },
-  { name: "Large Salad", description: "Healthy greens with grilled chicken.", price: 8.00, menu: dinner_menu },
-  { name: "Lobster Mac & Cheese", description: "Decadent mac and cheese with lobster chunks.", price: 31.00, menu: dinner_menu }
-])
-
-puts "Done."
+puts "Seeding complete! #{Restaurant.count} restaurant, #{Menu.count} menus, #{MenuItem.count} items, #{MenuItemPlacement.count} placements."
