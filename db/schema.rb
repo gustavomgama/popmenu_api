@@ -49,6 +49,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_06_191839) do
 
   add_foreign_key "menu_item_placements", "menu_items"
   add_foreign_key "menu_item_placements", "menus"
-  add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "restaurants"
 end
