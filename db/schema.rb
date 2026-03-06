@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_203809) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_06_191839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "menu_item_placements", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "menu_id", null: false
+    t.bigint "menu_item_id", null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id", "menu_item_id"], name: "index_menu_item_placements_on_menu_id_and_menu_item_id", unique: true
+    t.index ["menu_id"], name: "index_menu_item_placements_on_menu_id"
+    t.index ["menu_item_id"], name: "index_menu_item_placements_on_menu_item_id"
+  end
 
   create_table "menu_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.text "description"
-    t.bigint "menu_id", null: false
     t.string "name"
-    t.decimal "price"
     t.datetime "updated_at", null: false
-    t.index ["menu_id"], name: "index_menu_items_on_menu_id"
+    t.index ["name"], name: "index_menu_items_on_name", unique: true
   end
 
   create_table "menus", force: :cascade do |t|
@@ -38,6 +47,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_203809) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "menu_item_placements", "menu_items"
+  add_foreign_key "menu_item_placements", "menus"
   add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "restaurants"
 end
