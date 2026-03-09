@@ -12,7 +12,6 @@ bundle install
 ```bash
 bin/rails db:prepare
 ```
-*Note: `db:prepare` will handle database creation, migrations, and seeding using the professional ingestion tool.*
 
 3. **Start the Server**:
 ```bash
@@ -34,8 +33,6 @@ bin/rails s
 ---
 
 ## JSON → Application Model Conversion Tool
-
-The application includes a specialized conversion tool to serialize and persist data from `json` files into the restaurant menu system.
 
 ### How to Run:
 The tool is exposed via a HTTP endpoint. To perform a conversion, ensure the server is running and submit a POST request with your JSON payload:
