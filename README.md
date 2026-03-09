@@ -1,7 +1,3 @@
-# MenuVault API
-
-## Getting Started
-
 ### Prerequisites
 - Ruby 4.0+
 - PostgreSQL 14+
