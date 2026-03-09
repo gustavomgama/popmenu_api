@@ -51,13 +51,13 @@ module Import
 
       it "handles the key trap (dishes vs menu_items)" do
         alt_data = {
-          "restaurants" => [{
+          "restaurants" => [ {
             "name" => "Alt",
-            "menus" => [{
+            "menus" => [ {
               "name" => "M",
-              "menu_items" => [{ "name" => "X", "price" => 1 }]
-            }]
-          }]
+              "menu_items" => [ { "name" => "X", "price" => 1 } ]
+            } ]
+          } ]
         }
         service = described_class.new(alt_data)
         expect { service.call }.to change(MenuItem, :count).by(1)

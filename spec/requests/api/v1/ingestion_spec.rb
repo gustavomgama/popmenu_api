@@ -10,7 +10,7 @@ RSpec.describe "Api::V1::Ingestions", type: :request do
             menus: [
               {
                 name: "M",
-                dishes: [{ name: "D", price: 10, description: "Desc" }]
+                dishes: [ { name: "D", price: 10, description: "Desc" } ]
               }
             ]
           }
@@ -30,7 +30,7 @@ RSpec.describe "Api::V1::Ingestions", type: :request do
 
     it "handles errors gracefully in the log" do
       invalid_payload = {
-        restaurants: [{ name: "T", menus: [{ name: "M", dishes: [{ price: 10 }] }] }]
+        restaurants: [ { name: "T", menus: [ { name: "M", dishes: [ { price: 10 } ] } ] } ]
       }
 
       post "/api/v1/ingestions", params: invalid_payload
